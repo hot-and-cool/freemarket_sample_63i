@@ -33,7 +33,7 @@
 ## phonenumberﾃｰﾌﾞﾙ
 |Column|Type|Options|
 |------|----|-------|
-|number|integer|null: false|
+|phonenumber|integer|null: false|
 |user_id|integer|foreign_key:true|
 
 ### Association
@@ -93,8 +93,55 @@
 ## imagesﾃｰﾌﾞﾙ
 |Column|Type|Options|
 |------|----|-------|
-|image|text|null: false|
-|item_id|reference|foreign_key|
+|image_url|text|null: false|
+|item_id|reference|foreign_key: true|
 
 ### Association
 - belong_to: item
+
+## categoriesﾃｰﾌﾞﾙ
+|Column|Type|Options|
+|------|----|-------|
+|name|text|null: false|
+|item_id|reference|foreign_key: true|
+
+### Association
+- has_many: items
+
+## conditionsﾃｰﾌﾞﾙ
+|Column|Type|Options|
+|------|----|-------|
+|name|text|null: false|
+|item_id|reference|foreign_key: true|
+
+### Association
+- has_many: items
+
+## postagesﾃｰﾌﾞﾙ
+|Column|Type|Options|
+|------|----|-------|
+|name|text|null: false|
+|item_id|reference|foreign_key: true|
+
+### Association
+- has_many: items
+
+## regionsﾃｰﾌﾞﾙ
+|Column|Type|Options|
+|------|----|-------|
+|name|text|null: false|
+|item_id|reference|foreign_key: true|
+
+### Association
+- has_many: items
+
+## commentsﾃｰﾌﾞﾙ
+|Column|Type|Options|
+|------|----|-------|
+|name|text|null: false|
+|item_id|reference|foreign_key: true|
+|user_id|reference|foreign_key: true|
+
+### Association
+- belong_to: item
+- belong_to: user
