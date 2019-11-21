@@ -6,12 +6,14 @@
 |password|integer|null: false, unique:true|
 
 ### Association
-- has_many:items
+- has_many:items, through: :users_items
+- has_many:users_items
 - has_one:personal, dependent: :destroy
 - has_one:phonenumber, dependent: :destroy
 - has_one:address, dependent: :destroy
 - has_one:credit_card, dependent: :destroy
 - has_many: comments
+- has_many: likes
 
 ## personalﾃｰﾌﾞﾙ
 |Column|Type|Options|
@@ -85,12 +87,14 @@
 
 ### Association
 - has_many: images
+- has_many: users, through: :users_items
 - has_many: comments
-- belong_to: user
 - has_many: categories
 - has_many: conditions
 - has_many: postages
 - has_many: regions
+- has_many: likes
+- has_many: comments
 
 ## imagesﾃｰﾌﾞﾙ
 |Column|Type|Options|
@@ -161,10 +165,29 @@
 - belong_to: user
 
 
+## users_itemsﾃｰﾌﾞﾙ
+|Column|Type|Options|
+|------|----|-------|
+|item_id|reference|foreign_key: true|
+|user_id|reference|foreign_key: true|
+
+### Association
+- belong_to: item
+- belong_to: user
+
 ## likesﾃｰﾌﾞﾙ
 |Column|Type|Options|
 |------|----|-------|
-|name|text|null: false|
+|item_id|reference|foreign_key: true|
+|user_id|reference|foreign_key: true|
+
+### Association
+- belong_to: item
+- belong_to: user
+
+## commentsﾃｰﾌﾞﾙ
+|Column|Type|Options|
+|------|----|-------|
 |item_id|reference|foreign_key: true|
 |user_id|reference|foreign_key: true|
 
