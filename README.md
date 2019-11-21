@@ -28,8 +28,7 @@
 |user_id|reference|foreign_key: true|
 
 ### Association
-<!-- - has_many:groups, through: :members
-- has_many:messages -->
+- belong_to: user
 
 ## phonenumberﾃｰﾌﾞﾙ
 |Column|Type|Options|
@@ -38,8 +37,7 @@
 |user_id|integer|foreign_key:true|
 
 ### Association
-<!-- - belongs_to:user
-- belongs_to:group -->
+- belong_to: user
 
 ## Addressﾃｰﾌﾞﾙ
 |Column|Type|Options|
@@ -51,8 +49,7 @@
 |user_id|reference|foreign_key:true|
 
 ### Association
-- belong_to:user
-- belong_to:group# git-app
+- belong_to: user
 
 ## creditﾃｰﾌﾞﾙ
 |Column|Type|Options|
@@ -65,23 +62,28 @@
 
 ### Association
 - belong_to:user
-- belong_to:group# git-app
 
 ## itemsﾃｰﾌﾞﾙ
 |Column|Type|Options|
 |------|----|-------|
+|image_id|reference|foreign_key: true|
 |name|string|null: false|
 |detail|text|null: false|
-|category_id|reference|foreing_key: true|
-|condition_id|reference|foreign_key: true|
-|postage_id|reference|foreign_key: true|
-|region_id|reference|foreign_key: true|
+|category_id|reference|null: false, foreing_key: true|
+|condition_id|reference|null: false, foreign_key: true|
+|postage_id|reference|null: false, foreign_key: true|
+|region_id|reference|null: false, foreign_key: true|
+|deliverdays|string|null: false|
+|price|integer|null: false|
+|handling|integer|-------|
+|profit|string|-------|
 |saler(user_id)|reference|foreign_key: true|
 |buyer(user_id)|reference|foreign_key: true|
 
 ### Association
 - has_many: images
 - has_many: comments
+- has_many: users
 - belong_to: category
 - belong_to: condition
 - belong_to: postage
@@ -95,4 +97,4 @@
 |item_id|reference|foreign_key|
 
 ### Association
-- belong_to:item
+- belong_to: item
