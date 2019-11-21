@@ -1,4 +1,4 @@
-## userﾃｰﾌﾞﾙ
+## usersﾃｰﾌﾞﾙ
 |Column|Type|Options|
 |------|----|-------|
 |name|string|null: false, unique:true|
@@ -11,7 +11,7 @@
 - has_one:phonenumber, dependent: :destroy
 - has_one:address, dependent: :destroy
 - has_one:credit_card, dependent: :destroy
-- has_many:comments
+- has_many: comments
 
 ## personalﾃｰﾌﾞﾙ
 |Column|Type|Options|
@@ -30,10 +30,10 @@
 ### Association
 - belong_to: user
 
-## phonenumberﾃｰﾌﾞﾙ
+## phonenumbersﾃｰﾌﾞﾙ
 |Column|Type|Options|
 |------|----|-------|
-|phonenumber|integer|null: false|
+|name|integer|null: false|
 |user_id|integer|foreign_key:true|
 
 ### Association
@@ -43,18 +43,19 @@
 |Column|Type|Options|
 |------|----|-------|
 |postalcode|integer|null: false|
-|region|string|null: false|
+|region_id|string|null: false|
 |city|string|null: false|
 |districtnum|string|null: false|
 |user_id|reference|foreign_key:true|
 
 ### Association
 - belong_to: user
+- has_many: regions
 
-## creditﾃｰﾌﾞﾙ
+## creditsﾃｰﾌﾞﾙ
 |Column|Type|Options|
 |------|----|-------|
-|creditnumber|integer|null: false|
+|name|integer|null: false|
 |limit_year|integer|null: false|
 |limit_month|integer|null: false|
 |security|integer|null: false|
@@ -62,6 +63,8 @@
 
 ### Association
 - belong_to:user
+
+
 
 ## itemsﾃｰﾌﾞﾙ
 |Column|Type|Options|
@@ -83,12 +86,11 @@
 ### Association
 - has_many: images
 - has_many: comments
-- has_many: users
-- belong_to: category
-- belong_to: condition
-- belong_to: postage
-- belong_to: region
-
+- belong_to: user
+- has_many: categories
+- has_many: conditions
+- has_many: postages
+- has_many: regions
 
 ## imagesﾃｰﾌﾞﾙ
 |Column|Type|Options|
@@ -106,7 +108,17 @@
 |item_id|reference|foreign_key: true|
 
 ### Association
-- has_many: items
+- belong_to: item
+- has_many: sizes
+
+## sizesﾃｰﾌﾞﾙ
+|Column|Type|Options|
+|------|----|-------|
+|name|text|null: false|
+|category_id|reference|foreign_key: true|
+
+### Association
+- belong_to: category
 
 ## conditionsﾃｰﾌﾞﾙ
 |Column|Type|Options|
@@ -131,11 +143,25 @@
 |------|----|-------|
 |name|text|null: false|
 |item_id|reference|foreign_key: true|
+|address_id|reference|foreign_key: true|
 
 ### Association
-- has_many: items
+- belong_to: item
+- belong_to: address
 
 ## commentsﾃｰﾌﾞﾙ
+|Column|Type|Options|
+|------|----|-------|
+|name|text|null: false|
+|item_id|reference|foreign_key: true|
+|user_id|reference|foreign_key: true|
+
+### Association
+- belong_to: item
+- belong_to: user
+
+
+## likesﾃｰﾌﾞﾙ
 |Column|Type|Options|
 |------|----|-------|
 |name|text|null: false|
